@@ -9,3 +9,41 @@ The cache is initialized with a positive capacity.
 Follow up:
 Could you do both operations in O(1) time complexity?
 */
+class LRUCache {
+public:
+    int cap;
+    list<int>l;
+    unordered_map<int,int>m;
+    LRUCache(int capacity) {
+        cap = capacity;
+    }
+    
+    int get(int key) {
+        if(m.find(key)==m.end())
+            return -1;
+        l.remove(key);
+        l.push_back(key);
+        return m[key];
+    }
+    
+    void put(int key, int value) {
+        if(m.find(key)!=m.end()){
+            l.remove(key);
+            m.erase(key);
+        }
+        if(l.size()==cap){
+            int val = l.front();
+            l.pop_front();
+              m.erase(val); 
+        }
+        l.push_back(key);
+        m[key]=value;
+    }
+};
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache* obj = new LRUCache(capacity);
+ * int param_1 = obj->get(key);
+ * obj->put(key,value);
+ */
