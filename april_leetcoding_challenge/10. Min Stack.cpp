@@ -26,13 +26,12 @@ public:
     }
     
     void pop() {
-        //int temp =st.top().second;
         st.pop();
         if(st.empty()){
             min_val=INT_MAX;
         }
         else{
-            min_val = st.top().second;//temp;
+            min_val = st.top().second;
         }
     }
     
